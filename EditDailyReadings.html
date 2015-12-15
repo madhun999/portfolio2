@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Operations Online Data Entry - Reading Point Data Entry (CEDAR WATERSHED 0700)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/jquery-ui.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ICanHaz.js"></script>
+
+    <link rel="stylesheet" href="styles/styles-bs.css">
+  </head>
+
+  <body id="bogus-page">
+
+    <div class="container-fluid">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li id="BreadcrumbLocation" class="active">OODE - Daily Reading Point Data Entry (CEDAR WATERSHED 0700)</li>
+      </ol>
+
+      <div class="button-bar">
+        Reading Date:<input type="text" id="txtReadingDate" class="input-sm dater" onblur="EDRP_ValidateDate('txtReadingDate');" />
+        <button type="button" id="btnGetReadings" onclick="">&nbsp;Get Data&nbsp;</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="btnViewDraftReports" onclick="" >View Draft Reports</button>
+        <button type="button" id="btnUserManual" class="right-aligned-buttons" onclick="" >User Manual</button>
+
+        <!-- Warning alert box that gets shown via app.js/ShowAlert() and hidden via HideAlert(). By default it's hidden. -->
+        <div class="alert alert-danger fade in" style="float:right;display:none;">
+          <a href="#" class="close" onclick="$('.alert').hide()">&times;</a>
+          <span id="AlertText"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
+
+      <table class="table table-bordered table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Reading Point Key</th>
+            <th>Reading Point Name</th>
+            <th>UOM</th>
+            <th>Reading</th>
+            <th>State</th>
+            <th>Actual/<br />Est.</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+
+        <tbody id="divReadingPointList">
+          <!-- The list of reading points will be dynamically built in this div, using the moustache template below -->
+
+          <tr class="TableRowEven">
+            <td><strong>8375</strong></td>
+            <td>Chester Morse Lake Water Elevation (ODE 8375)</td>
+            <td>FT</td>
+            <td>
+              <input type="number" id="t001" class="input-sm ReadingValuesDSCRT" style="display:normal;"
+                     size="10" min="1500" max="1575" title="Value must be a number between 1500 and 1575" data-oode=","
+                     onblur="" value="" >
+              <button type="button" class="btn btn-xs" style="display:normal;" title="Click here to show reading-point history" onclick="">H</button>
+              <span class="tiny-note">Min: 1500<br>Max: 1575</span>
+            </td>
+            <td>
+              <select id="s001" class="input-sm ReadingValuesST" data-oode=",," style="display:none;" >
+              </select>
+            </td>
+            <td>
+              <select id="e001" class="input-sm ReadingActualEstimate" data-oode="" >
+                <option value="A">A</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" id="c001" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="" >
+            </td>
+          </tr>
+
+          <tr class="TableRowOdd">
+            <td><strong>8432</strong></td>
+            <td>Masonry Pool Water Elevation (ODE 8432)</td>
+            <td>FT</td>
+            <td>
+              <input type="number" id="t002" class="input-sm ReadingValuesDSCRT" style="display:normal;"
+                     size="10" min="1500" max="1575" title="Value must be a number between 1500 and 1575" data-oode=","
+                     onblur="" value="">
+              <button type="button" class="btn btn-xs" style="display:normal;" title="Click here to show reading-point history" onclick="">H</button>
+              <span class="tiny-note">Min: 1500<br>Max: 1575</span>
+            </td>
+            <td>
+              <select id="s002" class="input-sm ReadingValuesST" data-oode=",," style="display:none;">
+              </select>
+            </td>
+            <td>
+              <select id="e002" class="input-sm ReadingActualEstimate" data-oode="">
+                <option value="A">A</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" id="c002" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
+            </td>
+          </tr>
+
+          <tr class="TableRowEven">
+            <td><strong>8439<br>8438</strong></td>
+            <td>Masonry Weather Station Wind Vlcy (ODE 8439)<br>Masonry Weather Station Wind Dir (ODE 8438)</td>
+            <td>MPH</td>
+            <td>
+              <input type="number" id="t003" class="input-sm ReadingValuesDSCRT" style="display:normal;"
+                     size="10" min="0" max="100" title="Value must be a number between 0 and 100" data-oode=","
+                     onblur="" value="">
+              <button type="button" class="btn btn-xs" style="display:normal;" title="Click here to show reading-point history" onclick="">H</button>
+              <span class="tiny-note">Min: 0<br>Max: 100</span>
+            </td>
+            <td>
+              <select id="s003" class="input-sm ReadingValuesST" data-oode=",," style="display:visible;">
+                <option value="-1">-</option>
+                <option value="0">CALM</option>
+                <option value="1">E</option>
+                <option value="2">N</option>
+                <option value="3">NE</option>
+                <option value="4">NW</option>
+                <option value="5">W</option>
+                <option value="6">SE</option>
+                <option value="7">SW</option>
+                <option value="8">W</option>
+              </select>
+            </td>
+            <td>
+              <select id="e003" class="input-sm ReadingActualEstimate" data-oode="">
+                <option value="A">A</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" id="c003" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
+            </td>
+          </tr>
+
+          <tr class="TableRowOdd">
+            <td><strong>8436</strong></td>
+            <td>Masonry Weather Station Snow Depth (ODE 8436)</td>
+            <td>INCHES</td>
+            <td>
+              <input type="number" id="t004" class="input-sm ReadingValuesDSCRT" style="display:normal;"
+                     size="10" min="0" max="250" title="Value must be a number between 0 and 250" data-oode=","
+                     onblur="" value="">
+              <button type="button" class="btn btn-xs" style="display:normal;" title="Click here to show reading-point history" onclick="">H</button>
+              <span class="tiny-note">Min: 0<br>Max: 250</span>
+            </td>
+            <td>
+              <select id="s004" class="input-sm ReadingValuesST" data-oode=",," style="display:none;"></select>
+            </td>
+            <td>
+              <select id="e004" class="input-sm ReadingActualEstimate" data-oode="">
+                <option value="A">A</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" id="c004" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
+            </td>
+          </tr>
+
+          <tr class="TableRowEven">
+            <td><strong>8442</strong></td>
+            <td>Rattlesnake Lake Water Elevation (ODE 8442)</td>
+            <td>FEET</td>
+            <td>
+              <input type="number" id="t005" class="input-sm ReadingValuesDSCRT" style="display:normal;"
+                     size="10" min="850" max="915" title="Value must be a number between 850 and 915" data-oode=","
+                     onblur="" value="">
+              <button type="button" class="btn btn-xs" style="display:normal;" title="Click here to show reading-point history" onclick="">H</button>
+              <span class="tiny-note">Min: 850<br>Max: 915</span>
+            </td>
+            <td>
+              <select id="s005" class="input-sm ReadingValuesST" data-oode=",," style="display:none;"></select>
+            </td>
+            <td>
+              <select id="e005" class="input-sm ReadingActualEstimate" data-oode="">
+                <option value="A">A</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" id="c005" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="right-aligned-buttons">
+        <button type="button" id="btnSaveReadings" onmousedown="">Save Readings</button>
+        &nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="">Clear Readings</button>
+      </div>
+    </div>
+
+
+    <!-- Please Wait dialog -->
+    <div id="dlgPleaseWait" class="modal" role="dialog" data-backdrop="false" data-keyboard="false" style="top:30%">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="background-color:#E0E0E0">
+          <div id="foo" class="modal-body" style="left:30%">
+            <br /><br />
+            <b><span id="divPleaseMessage">Please wait while the page is refreshed...</span></b>
+            <br /><br /><br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
