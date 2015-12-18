@@ -24,7 +24,7 @@
       </ol>
 
       <div class="button-bar">
-        Reading Date:<input type="text" id="txtReadingDate" class="input-sm dater" onblur="EDRP_ValidateDate('txtReadingDate');" />
+        <label for="txtReadingDate">Reading Date:</label><input type="text" id="txtReadingDate" class="input-sm dater" onblur="EDRP_ValidateDate('txtReadingDate');" />
         <button type="button" id="btnGetReadings" onclick="">&nbsp;Get Data&nbsp;</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button type="button" id="btnViewDraftReports" onclick="" >View Draft Reports</button>
@@ -38,15 +38,16 @@
       </div>
 
       <table class="table table-bordered table-striped table-condensed">
+        <caption class="sr-only">Reading Point Editing Table</caption>
         <thead>
           <tr>
-            <th>Reading Point Key</th>
-            <th>Reading Point Name</th>
-            <th>UOM</th>
-            <th>Reading</th>
-            <th>State</th>
-            <th>Actual/<br />Est.</th>
-            <th>Comments</th>
+            <th scope="col">Reading Point Key</th>
+            <th scope="col">Reading Point Name</th>
+            <th scope="col" title="Unit of Measure">UOM</th>
+            <th scope="col" title="Reading Discrete Value">Reading</th>
+            <th scope="col" title="Optional Reading State Value">State</th>
+            <th scope="col" title="Actual or Estimated">Actual/<br />Est.</th>
+            <th scope="col">Comments</th>
           </tr>
         </thead>
 
@@ -54,10 +55,11 @@
           <!-- The list of reading points will be dynamically built in this div, using the moustache template below -->
 
           <tr class="TableRowEven">
-            <td><strong>8375</strong></td>
+            <th scope="row"><strong>8375</strong></th>
             <td>Chester Morse Lake Water Elevation (ODE 8375)</td>
             <td>FT</td>
             <td>
+              <label for="t001" class="sr-only">Reading Discrete Value:</label>
               <input type="number" id="t001" class="input-sm ReadingValuesDSCRT" style="display:normal;"
                      size="10" min="1500" max="1575" title="Value must be a number between 1500 and 1575" data-oode=","
                      onblur="" value="" >
@@ -65,25 +67,29 @@
               <span class="tiny-note">Min: 1500<br>Max: 1575</span>
             </td>
             <td>
+              <label for="s001" class="sr-only">No State Value</label>
               <select id="s001" class="input-sm ReadingValuesST" data-oode=",," style="display:none;" >
               </select>
             </td>
             <td>
+              <label for="e001" class="sr-only">Actual or Estimated?</label>
               <select id="e001" class="input-sm ReadingActualEstimate" data-oode="" >
                 <option value="A">A</option>
                 <option value="E">E</option>
               </select>
             </td>
             <td>
+              <label for="c001" class="sr-only">Comments:</label>
               <input type="text" id="c001" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="" >
             </td>
           </tr>
 
           <tr class="TableRowOdd">
-            <td><strong>8432</strong></td>
+            <th scope="row"><strong>8432</strong></th>
             <td>Masonry Pool Water Elevation (ODE 8432)</td>
             <td>FT</td>
             <td>
+              <label for="t002" class="sr-only">Reading Discrete Value:</label>
               <input type="number" id="t002" class="input-sm ReadingValuesDSCRT" style="display:normal;"
                      size="10" min="1500" max="1575" title="Value must be a number between 1500 and 1575" data-oode=","
                      onblur="" value="">
@@ -91,25 +97,29 @@
               <span class="tiny-note">Min: 1500<br>Max: 1575</span>
             </td>
             <td>
+              <label for="s002" class="sr-only">No State Value</label>
               <select id="s002" class="input-sm ReadingValuesST" data-oode=",," style="display:none;">
               </select>
             </td>
             <td>
+              <label for="e002" class="sr-only">Actual or Estimated?</label>
               <select id="e002" class="input-sm ReadingActualEstimate" data-oode="">
                 <option value="A">A</option>
                 <option value="E">E</option>
               </select>
             </td>
             <td>
+              <label for="c002" class="sr-only">Comments:</label>
               <input type="text" id="c002" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
             </td>
           </tr>
 
           <tr class="TableRowEven">
-            <td><strong>8439<br>8438</strong></td>
+            <th scope="row"><strong>8439<br>8438</strong></th>
             <td>Masonry Weather Station Wind Vlcy (ODE 8439)<br>Masonry Weather Station Wind Dir (ODE 8438)</td>
             <td>MPH</td>
             <td>
+              <label for="t003" class="sr-only">Reading Discrete Value:</label>
               <input type="number" id="t003" class="input-sm ReadingValuesDSCRT" style="display:normal;"
                      size="10" min="0" max="100" title="Value must be a number between 0 and 100" data-oode=","
                      onblur="" value="">
@@ -117,6 +127,7 @@
               <span class="tiny-note">Min: 0<br>Max: 100</span>
             </td>
             <td>
+              <label for="s003" class="sr-only">Reading State Value:</label>
               <select id="s003" class="input-sm ReadingValuesST" data-oode=",," style="display:visible;">
                 <option value="-1">-</option>
                 <option value="0">CALM</option>
@@ -131,21 +142,24 @@
               </select>
             </td>
             <td>
+              <label for="e003" class="sr-only">Actual or Estimated?</label>
               <select id="e003" class="input-sm ReadingActualEstimate" data-oode="">
                 <option value="A">A</option>
                 <option value="E">E</option>
               </select>
             </td>
             <td>
+              <label for="c003" class="sr-only">Comments:</label>
               <input type="text" id="c003" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
             </td>
           </tr>
 
           <tr class="TableRowOdd">
-            <td><strong>8436</strong></td>
+            <th scope="row"><strong>8436</strong></th>
             <td>Masonry Weather Station Snow Depth (ODE 8436)</td>
             <td>INCHES</td>
             <td>
+              <label for="t004" class="sr-only">Reading Discrete Value:</label>
               <input type="number" id="t004" class="input-sm ReadingValuesDSCRT" style="display:normal;"
                      size="10" min="0" max="250" title="Value must be a number between 0 and 250" data-oode=","
                      onblur="" value="">
@@ -153,24 +167,28 @@
               <span class="tiny-note">Min: 0<br>Max: 250</span>
             </td>
             <td>
+              <label for="s001" class="sr-only">No State Value</label>
               <select id="s004" class="input-sm ReadingValuesST" data-oode=",," style="display:none;"></select>
             </td>
             <td>
+              <label for="e004" class="sr-only">Actual or Estimated?</label>
               <select id="e004" class="input-sm ReadingActualEstimate" data-oode="">
                 <option value="A">A</option>
                 <option value="E">E</option>
               </select>
             </td>
             <td>
+              <label for="c004" class="sr-only">Comments:</label>
               <input type="text" id="c004" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
             </td>
           </tr>
 
           <tr class="TableRowEven">
-            <td><strong>8442</strong></td>
+            <th scope="row"><strong>8442</strong></th>
             <td>Rattlesnake Lake Water Elevation (ODE 8442)</td>
             <td>FEET</td>
             <td>
+              <label for="t005" class="sr-only">Reading Discrete Value:</label>
               <input type="number" id="t005" class="input-sm ReadingValuesDSCRT" style="display:normal;"
                      size="10" min="850" max="915" title="Value must be a number between 850 and 915" data-oode=","
                      onblur="" value="">
@@ -178,15 +196,18 @@
               <span class="tiny-note">Min: 850<br>Max: 915</span>
             </td>
             <td>
+              <label for="s001" class="sr-only">No State Value</label>
               <select id="s005" class="input-sm ReadingValuesST" data-oode=",," style="display:none;"></select>
             </td>
             <td>
+              <label for="e005" class="sr-only">Actual or Estimated?</label>
               <select id="e005" class="input-sm ReadingActualEstimate" data-oode="">
                 <option value="A">A</option>
                 <option value="E">E</option>
               </select>
             </td>
             <td>
+              <label for="c005" class="sr-only">Comments:</label>
               <input type="text" id="c005" class="input-sm ReadingComments" style="width:100%" maxlength="256" data-oode="" value="">
             </td>
           </tr>
